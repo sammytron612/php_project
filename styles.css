@@ -1,6 +1,6 @@
 
 .sidebar {
-    background-color: #eaeaea;
+    background-color: white;
     box-shadow: 1px 0 12px rgba(0,0,0,0.12);
     border-right: 1px solid #ccc;
     width: 200px;
@@ -174,8 +174,19 @@ thead, th {
 }
 
 
-.main-content {
-    
+.header {
     padding: 20px;
+    text-align: center; 
+    background-color: #f5f5f5; 
+    border-bottom: 1px solid #ccc; 
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     text-align: center;
+}
+
+.lorem {
+    margin-top:10px;
+    margin-left: 15%;
+    margin-right: 15%;
+
+    text-align: left;
 }
