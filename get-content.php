@@ -6,7 +6,7 @@ ini_set('display_errors', 0);
 header('Content-Type: application/json');
 
 try {
-    sleep(1); // Simulate network dela
+    usleep(200000); // Simulate network delay //
     
     $input = json_decode(file_get_contents('php://input'), true);
     $page = isset($input['page']) ? (int)$input['page'] : 1;
