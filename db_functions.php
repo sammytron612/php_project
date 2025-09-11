@@ -3,7 +3,7 @@
 class DatabaseConnection {
     private $servername = "localhost";
     private $username = "root";
-    private $password = "targa123";
+    private $password = "";
     private $dbname = "starred_repos";
     public $conn;
 
