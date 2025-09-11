@@ -17,7 +17,7 @@ class DatabaseConnection {
         if ($this->conn->connect_error) {
             die("Connection failed: " . $this->conn->connect_error);
         } else{
-            // echo "Connected successfully";
+            
             return $this->conn;
         }
     }
@@ -50,6 +50,7 @@ class DatabaseConnection {
     }
 
     public function checkIfExists($username, $repo) {
+        
         ### check if user already has existing repos by same name###
         $existing = $this->conn->prepare("SELECT username FROM repos WHERE username = ? AND repo_name = ?");
         $existing->bind_param("ss", $username, $repo);

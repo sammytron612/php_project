@@ -1,4 +1,5 @@
 <?php
+/////dummy ajax content/////
 
 header('Content-Type: application/json');
 

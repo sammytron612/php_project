@@ -1,8 +1,8 @@
 <?php
 
 session_start();
-require 'db_functions.php';
-require 'curl_functions.php';
+require_once 'db_functions.php';
+require_once 'curl_functions.php';
 
 define("LIMIT", 5); /// pagination offset ///
 
@@ -13,7 +13,7 @@ if($_SERVER['REQUEST_METHOD'] === 'GET'){
 }
 
 
-$results = fetchUsers($page);
+$results = fetchGitHubUsers($page);
 $users = $results['results'];
 $lastPage = $results['lastPage'];
 
@@ -42,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 
-function fetchUsers($page) : array {
+function fetchGitHubUsers($page) : array {
     $db = new DatabaseConnection();
     $results = $db->getUsernames($page);
     $db->close();
@@ -63,7 +63,7 @@ function fetchUsers($page) : array {
     <div class="grid-container">
         <div>
             <h2>Search GitHub User's Starred Repositories</h2>
-            <!-- Display message if exists -->
+            <!-- Display message if in session -->
             <?php if (isset($_SESSION['message'])): ?>
                 <div class="message <?php echo $_SESSION['message_type'] === 'success' ? 'success' : 'error'; ?>">
                     <?php echo $_SESSION['message']; ?>

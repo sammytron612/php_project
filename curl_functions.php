@@ -13,7 +13,7 @@ function searchStarredRepos($username) {
     if ($httpCode === 200) {
         return json_decode($response, true);
     } else {
-        echo "Error: HTTP " . $httpCode . " - Unable to fetch data from GitHub API.<br>";
+        echo "Error: HTTP " . $httpCode . " - Unable to fetch data from GitHub<br>";
         return null;
     }
 }

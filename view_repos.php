@@ -1,5 +1,5 @@
 <?php
-require 'db_functions.php';
+require_once 'db_functions.php';
 
 
 $username = isset($_GET['user']) ? trim($_GET['user']) : '';
