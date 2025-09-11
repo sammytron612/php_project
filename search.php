@@ -1,9 +1,9 @@
 <?php
 
-
+session_start();
 require 'db_functions.php';
 require 'curl_functions.php';
-define("LIMIT", 2);
+define("LIMIT", 5);
 
 $page = 1;
 
@@ -18,18 +18,30 @@ $lastPage = $results['lastPage'];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = isset($_POST['username']) ? trim($_POST['username']) : '';
-    
+
+    // Check for session message
+   if (isset($_SESSION['message'])) {
+        //$message = $_SESSION['message'];
+        unset($_SESSION['message']); // Remove message after displaying
+
+    }
+
     if ($username) {
         $repos = searchStarredRepos($username);
         if ($repos) {
             $db = new DatabaseConnection();
             $db->storeRepo($repos,$username);
             $db->close();
+            // Set success message in session
+            $_SESSION['message'] = "User '" . htmlspecialchars($username) . "' and their starred repositories have been successfully added to the database!";
+            $_SESSION['message_type'] = 'success';
+
             // Redirect to refresh the page and update the table
             header("Location: " . $_SERVER['PHP_SELF']);
             exit();
         } else {
-            echo "No starred repositories found for " . htmlspecialchars($username) . " or error occurred.<br>";
+            $_SESSION['message'] = "No starred repositories found for " . htmlspecialchars($username) . " or an error occurred.";
+            $_SESSION['message_type'] = 'error';
         }
        
     }
@@ -57,6 +69,12 @@ function fetchUsers($page) : array {
     <div class="grid-container">
         <div>
             <h2>Search GitHub User's Starred Repositories</h2>
+            <!-- Display message if exists -->
+            <?php if (isset($_SESSION['message'])): ?>
+                <div class="message <?php echo $_SESSION['message_type'] === 'success' ? 'success' : 'error'; ?>">
+                    <?php echo $_SESSION['message']; ?>
+                </div>
+            <?php endif; ?>
             <form action="search.php" method="post">
                 <label for="username">Username:</label>
                 <input type="text" name="username" id="username" required>
