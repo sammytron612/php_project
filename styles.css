@@ -184,9 +184,22 @@ thead, th {
 }
 
 .lorem {
-    margin-top:10px;
-    margin-left: 15%;
-    margin-right: 15%;
-
+    margin-top: 20px;
+    
     text-align: left;
+}
+.lorem img {
+    float: left;
+    margin-right: 15px;
+    margin-bottom: 10px;
+    max-width: 200px;
+}
+.lorem img + div {
+    margin-left: 15px;
+}
+
+.lorem::after {
+    content: "";
+    display: table;
+    clear: both;
 }
