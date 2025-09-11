@@ -1,7 +1,4 @@
 <?php
-// Turn off error display to prevent HTML errors
-error_reporting(E_ALL);
-ini_set('display_errors', 0);
 
 header('Content-Type: application/json');
 
