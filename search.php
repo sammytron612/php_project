@@ -3,7 +3,8 @@
 session_start();
 require 'db_functions.php';
 require 'curl_functions.php';
-define("LIMIT", 5);
+
+define("LIMIT", 5); /// pagination offset ///
 
 $page = 1;
 
@@ -18,13 +19,6 @@ $lastPage = $results['lastPage'];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = isset($_POST['username']) ? trim($_POST['username']) : '';
-
-    // Check for session message
-   if (isset($_SESSION['message'])) {
-        //$message = $_SESSION['message'];
-        unset($_SESSION['message']); // Remove message after displaying
-
-    }
 
     if ($username) {
         $repos = searchStarredRepos($username);
@@ -61,7 +55,7 @@ function fetchUsers($page) : array {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>File Upload Example</title>
+    <title>Github stars</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -74,6 +68,11 @@ function fetchUsers($page) : array {
                 <div class="message <?php echo $_SESSION['message_type'] === 'success' ? 'success' : 'error'; ?>">
                     <?php echo $_SESSION['message']; ?>
                 </div>
+                <?php 
+                // Clear the message after displaying //
+                unset($_SESSION['message']);
+                unset($_SESSION['message_type']);
+                ?>
             <?php endif; ?>
             <form action="search.php" method="post">
                 <label for="username">Username:</label>
